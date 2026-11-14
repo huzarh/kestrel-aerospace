@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>KESTREL AEROSPACE</title>
+  <script>
+    (function () {
+      var segs = window.location.pathname.split('/').filter(Boolean);
+      var base = window.location.hostname.endsWith('.github.io') && segs.length > 0 ? '/' + segs[0] + '/' : '/';
+      window.location.replace(base);
+    })();
+  </script>
+</head>
+<body></body>
+</html>

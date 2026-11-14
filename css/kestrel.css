@@ -1,0 +1,1165 @@
+/* ==========================================================================
+   KESTREL AEROSPACE — INDUSTRIAL & SOVEREIGN AVIATION DESIGN SYSTEM
+   Built on aerospace-web-craft (Pyka × Anduril × Quantum-Systems × Boom)
+   Zero AI-Slop: 0–2px radii, 1px exposed hairlines, zero neon blur gradients.
+   ========================================================================== */
+
+:root {
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Dark Hangar / C2 Telemetry Chapter Tokens */
+  --bg-obsidian: #090A0C;
+  --bg-hangar: #0F1216;
+  --bg-panel: #161B22;
+  --ink-primary-dark: #F4F5F7;
+  --ink-secondary-dark: #9BA3AF;
+  --ink-muted-dark: #636C7A;
+  --hairline-dark: #21262F;
+  --hairline-dark-strong: #384150;
+
+  /* Light Archival Drafting Paper Chapter Tokens */
+  --bg-bone: #F2F1EC;
+  --bg-paper: #FAF9F5;
+  --bg-stone: #E5E3DB;
+  --ink-primary-light: #0B0D10;
+  --ink-secondary-light: #414750;
+  --ink-muted-light: #717884;
+  --hairline-light: #D3D0C6;
+  --hairline-light-strong: #9B978B;
+
+  /* Strictly Scoped Industrial Signal Accents (<5% area) */
+  --signal-volt: #DFF140;
+  --accent-s1: #0055FF;
+  --accent-b2: #1A8748;
+  --accent-b2-hi: #B8DF24;
+  --accent-a2: #FF4400;
+  --status-ok: #12B76A;
+  --status-warn: #F79009;
+
+  --container-max: 1440px;
+  --header-h: 64px;
+  --cell-pad-sm: 1.25rem;
+  --cell-pad-md: 2rem;
+  --cell-pad-lg: 3.25rem;
+  --section-py: clamp(4rem, 7vw, 6.75rem);
+  --radius-none: 0px;
+  --radius-micro: 2px;
+  --snap-fast: 120ms linear;
+  --ease-mech: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-obsidian);
+  color: var(--ink-primary-dark);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.55;
+  background-color: var(--bg-obsidian);
+  color: var(--ink-primary-dark);
+  overflow-x: hidden;
+}
+
+img, svg, canvas, video {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* Numeric Precision Discipline */
+.tnum, table, .metric-val, .spec-val, .eyebrow, .mono, code {
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Chapter Themes */
+[data-theme="dark"] {
+  --bg-canvas: var(--bg-obsidian);
+  --bg-surface: var(--bg-hangar);
+  --bg-elevated: var(--bg-panel);
+  --ink-primary: var(--ink-primary-dark);
+  --ink-secondary: var(--ink-secondary-dark);
+  --ink-muted: var(--ink-muted-dark);
+  --hairline: var(--hairline-dark);
+  --hairline-strong: var(--hairline-dark-strong);
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+}
+
+[data-theme="light"] {
+  --bg-canvas: var(--bg-bone);
+  --bg-surface: var(--bg-paper);
+  --bg-elevated: var(--bg-stone);
+  --ink-primary: var(--ink-primary-light);
+  --ink-secondary: var(--ink-secondary-light);
+  --ink-muted: var(--ink-muted-light);
+  --hairline: var(--hairline-light);
+  --hairline-strong: var(--hairline-light-strong);
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+}
+
+[data-div="s1"] { --accent-div: var(--accent-s1); }
+[data-div="b2"] { --accent-div: var(--accent-b2); }
+[data-div="a2"] { --accent-div: var(--accent-a2); }
+
+/* ==========================================================================
+   STICKY SWISS AEROSPACE HEADER & NAVIGATION
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  height: var(--header-h);
+  width: 100%;
+  background: rgba(9, 10, 12, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--hairline-dark);
+  color: var(--ink-primary-dark);
+}
+
+.header-inner {
+  max-width: var(--container-max);
+  height: 100%;
+  margin: 0 auto;
+  border-inline: 1px solid var(--hairline-dark);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.brand-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.5rem;
+  border-right: 1px solid var(--hairline-dark);
+  text-decoration: none;
+  color: var(--ink-primary-dark);
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.brand-wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.02rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted-dark);
+  border-left: 1px solid var(--hairline-dark-strong);
+  padding-left: 0.75rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0 1.1rem;
+  border-right: 1px solid var(--hairline-dark);
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-secondary-dark);
+  text-decoration: none;
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  cursor: pointer;
+  transition: color var(--snap-fast), background-color var(--snap-fast);
+  position: relative;
+}
+
+.nav-item .idx {
+  color: var(--ink-muted-dark);
+  font-size: 0.68rem;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: var(--ink-primary-dark);
+  background-color: var(--bg-hangar);
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--signal-volt);
+}
+
+.header-actions {
+  display: flex;
+  align-items: stretch;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 1rem;
+  border: none;
+  border-left: 1px solid var(--hairline-dark);
+  background: transparent;
+  color: var(--ink-secondary-dark);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color var(--snap-fast), color var(--snap-fast);
+}
+
+.lang-toggle:hover {
+  background: var(--bg-hangar);
+  color: var(--ink-primary-dark);
+}
+
+.lang-toggle .active-lang {
+  color: var(--signal-volt);
+  font-weight: 500;
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.35rem;
+  background: var(--ink-primary-dark);
+  color: var(--bg-obsidian);
+  border-left: 1px solid var(--hairline-dark);
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color var(--snap-fast), color var(--snap-fast);
+  white-space: nowrap;
+}
+
+.header-cta:hover {
+  background: var(--signal-volt);
+  color: var(--bg-obsidian);
+}
+
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--hairline-dark);
+  color: var(--ink-primary-dark);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   STRUCTURAL 12-COLUMN SWISS HAIRLINE GRID & REGISTRATION MARKS
+   ========================================================================== */
+.chapter {
+  width: 100%;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+}
+
+.rail {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  border-inline: 1px solid var(--hairline);
+  position: relative;
+}
+
+.fiducial-row {
+  position: relative;
+}
+
+.fiducial-row::before,
+.fiducial-row::after {
+  content: '+';
+  position: absolute;
+  top: -8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--hairline-strong);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.fiducial-row::before { left: -4.5px; }
+.fiducial-row::after { right: -4.5px; }
+
+.section-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem var(--cell-pad-md);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--bg-surface);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.eyebrow-tag {
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+
+/* Typography Hierarchy */
+.h-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.45rem, 4.9vw, 4.75rem);
+  font-weight: 500;
+  line-height: 0.99;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.h-chapter {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.3vw, 3.15rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.028em;
+  margin: 0;
+}
+
+.h-sub {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.016em;
+  margin: 0;
+}
+
+.prose {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  max-width: 62ch;
+  margin: 0;
+}
+
+/* Hairline Cell Layouts */
+.cells-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+}
+
+.cells-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+}
+
+.cells-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+}
+
+.split-4-8 {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: 1px;
+  background: var(--hairline);
+}
+
+.split-5-7 {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 1px;
+  background: var(--hairline);
+}
+
+.cell {
+  background: var(--bg-canvas);
+  padding: var(--cell-pad-md);
+}
+
+.cell-surface {
+  background: var(--bg-surface);
+  padding: var(--cell-pad-md);
+}
+
+.cell-lg {
+  background: var(--bg-canvas);
+  padding: var(--cell-pad-lg);
+}
+
+/* Mechanical Buttons */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.8rem 1.3rem;
+  border-radius: var(--radius-micro);
+  border: 1px solid var(--ink-primary);
+  background: var(--ink-primary);
+  color: var(--bg-canvas);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--snap-fast), color var(--snap-fast), border-color var(--snap-fast);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--ink-primary);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink-primary);
+  border: 1px solid var(--hairline-strong);
+}
+
+.btn-outline:hover {
+  background: var(--ink-primary);
+  color: var(--bg-canvas);
+  border-color: var(--ink-primary);
+}
+
+.btn-volt {
+  background: var(--signal-volt);
+  color: #090A0C;
+  border-color: var(--signal-volt);
+}
+
+.btn-volt:hover {
+  background: transparent;
+  color: var(--signal-volt);
+}
+
+/* ==========================================================================
+   HERO CHAPTER & METRIC LEDGER
+   ========================================================================== */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 1px;
+  background: var(--hairline);
+  min-height: 610px;
+}
+
+.hero-copy-cell {
+  background: var(--bg-canvas);
+  padding: clamp(2.2rem, 4vw, 3.75rem) var(--cell-pad-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-media-cell {
+  background: #07080A;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-render-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 440px;
+  background: #07080A;
+}
+
+.hero-render-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-hud-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.15rem 1.35rem;
+  background: linear-gradient(180deg, rgba(9,10,12,0.52) 0%, rgba(9,10,12,0) 26%, rgba(9,10,12,0) 72%, rgba(9,10,12,0.78) 100%);
+}
+
+.hud-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.08em;
+  color: rgba(244, 245, 247, 0.86);
+  text-transform: uppercase;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--signal-volt);
+  margin-right: 0.45rem;
+}
+
+.hero-switcher-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline-dark);
+  border-top: 1px solid var(--hairline-dark);
+}
+
+.hero-switch-btn {
+  background: var(--bg-hangar);
+  color: var(--ink-secondary-dark);
+  border: none;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  transition: background-color var(--snap-fast), color var(--snap-fast);
+}
+
+.hero-switch-btn strong {
+  display: block;
+  color: var(--ink-primary-dark);
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+.hero-switch-btn.active,
+.hero-switch-btn:hover {
+  background: var(--bg-panel);
+  color: var(--ink-primary-dark);
+}
+
+.hero-switch-btn.active {
+  box-shadow: inset 0 2px 0 var(--signal-volt);
+}
+
+/* Metric Cells */
+.metric-cell {
+  background: var(--bg-surface);
+  padding: 1.5rem var(--cell-pad-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.metric-val {
+  font-family: var(--font-mono);
+  font-size: clamp(1.75rem, 2.8vw, 2.65rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--ink-primary);
+}
+
+.metric-val .unit {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  margin-left: 0.2rem;
+}
+
+.metric-sub {
+  font-size: 0.84rem;
+  color: var(--ink-secondary);
+}
+
+/* Commercial Sub-Bar (Pyka Pelican-2 style) */
+.commercial-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem var(--cell-pad-md);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--bg-surface);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+.commercial-strip .pipes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.commercial-strip .pipe-sep {
+  color: var(--hairline-strong);
+}
+
+/* ==========================================================================
+   DIVISION SHOWCASE CARDS & ORTHOGRAPHIC SILHOUETTES
+   ========================================================================== */
+.division-row {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 1px;
+  background: var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.division-row:last-child {
+  border-bottom: none;
+}
+
+.division-info {
+  background: var(--bg-canvas);
+  padding: var(--cell-pad-lg) var(--cell-pad-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.75rem;
+}
+
+.division-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-primary);
+}
+
+.division-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent-div, var(--signal-volt));
+}
+
+.division-visual {
+  background: #08090C;
+  display: flex;
+  flex-direction: column;
+}
+
+.division-render {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.mini-spec-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+}
+
+.mini-spec {
+  background: var(--bg-surface);
+  padding: 0.85rem 1rem;
+}
+
+.mini-spec .k {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.2rem;
+}
+
+.mini-spec .v {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink-primary);
+}
+
+/* ==========================================================================
+   INTERACTIVE THREE.JS 3D CAD / GLB HARDWARE VIEWPORT
+   ========================================================================== */
+.cad-viewer-shell {
+  background: #0B0D11;
+  color: var(--ink-primary-dark);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 520px;
+}
+
+.cad-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--hairline-dark);
+  background: var(--bg-hangar);
+}
+
+.cad-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cad-chip {
+  padding: 0.42rem 0.72rem;
+  border-radius: var(--radius-micro);
+  border: 1px solid var(--hairline-dark-strong);
+  background: transparent;
+  color: var(--ink-secondary-dark);
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--snap-fast);
+}
+
+.cad-chip:hover,
+.cad-chip.active {
+  background: var(--ink-primary-dark);
+  color: var(--bg-obsidian);
+  border-color: var(--ink-primary-dark);
+}
+
+.cad-stage {
+  position: relative;
+  flex: 1;
+  min-height: 430px;
+  width: 100%;
+  cursor: grab;
+  overflow: hidden;
+}
+
+.cad-stage:active {
+  cursor: grabbing;
+}
+
+.cad-stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.cad-telemetry-overlay {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.9rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-secondary-dark);
+}
+
+.cad-dim-pill {
+  background: rgba(9, 10, 12, 0.84);
+  border: 1px solid var(--hairline-dark-strong);
+  padding: 0.4rem 0.65rem;
+}
+
+/* ==========================================================================
+   SPECIFICATION TABLES & COMPARE MATRIX
+   ========================================================================== */
+.spec-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--bg-surface);
+}
+
+.spec-tab-btn {
+  padding: 0.9rem 1.35rem;
+  border: none;
+  border-right: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--snap-fast);
+}
+
+.spec-tab-btn.active,
+.spec-tab-btn:hover {
+  background: var(--bg-canvas);
+  color: var(--ink-primary);
+}
+
+.spec-tab-btn.active {
+  box-shadow: inset 0 2px 0 var(--ink-primary);
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.spec-table th,
+.spec-table td {
+  padding: 0.88rem 1.25rem;
+  border-bottom: 1px solid var(--hairline);
+  text-align: left;
+  vertical-align: top;
+}
+
+.spec-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  width: 36%;
+}
+
+.spec-table td.val {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--ink-primary);
+}
+
+.spec-table tr:last-child th,
+.spec-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   ISO ENGINEERING BLUEPRINTS, PATENTS & CALCULATORS
+   ========================================================================== */
+.blueprint-card {
+  background: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blueprint-frame {
+  background: #FFFFFF;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--hairline);
+  aspect-ratio: 1.414 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.blueprint-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.blueprint-meta {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.patent-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 170px;
+  gap: 1px;
+  background: var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.patent-row > div {
+  background: var(--bg-canvas);
+  padding: 1.35rem 1.5rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* Interactive Calculators & Fleet Configurator Controls */
+.calc-control {
+  margin-bottom: 1.25rem;
+}
+
+.calc-control label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+  color: var(--ink-secondary);
+}
+
+.calc-control input[type="range"] {
+  width: 100%;
+  accent-color: var(--ink-primary);
+  cursor: pointer;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-field label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.form-input {
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-micro);
+  border: 1px solid var(--hairline-strong);
+  background: var(--bg-surface);
+  color: var(--ink-primary);
+  font-size: 0.94rem;
+}
+
+.form-input:focus {
+  outline: 1px solid var(--signal-volt);
+  border-color: var(--signal-volt);
+}
+
+.option-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--hairline);
+  background: var(--bg-surface);
+  cursor: pointer;
+  margin-bottom: 0.55rem;
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.site-footer {
+  background: #060709;
+  color: var(--ink-secondary-dark);
+  border-top: 1px solid var(--hairline-dark);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--hairline-dark);
+}
+
+.footer-cell {
+  background: #060709;
+  padding: 2.5rem var(--cell-pad-md);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer-links a {
+  color: var(--ink-secondary-dark);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color var(--snap-fast);
+}
+
+.footer-links a:hover {
+  color: var(--ink-primary-dark);
+}
+
+.footer-bottom {
+  padding: 1.1rem var(--cell-pad-md);
+  border-top: 1px solid var(--hairline-dark);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.71rem;
+  color: var(--ink-muted-dark);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1120px) {
+  .hero-grid,
+  .split-4-8,
+  .split-5-7,
+  .division-row {
+    grid-template-columns: 1fr;
+  }
+  .cells-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cells-3 {
+    grid-template-columns: 1fr;
+  }
+  .patent-row {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .brand-sub {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: var(--bg-obsidian);
+    border-bottom: 1px solid var(--hairline-dark);
+    z-index: 95;
+  }
+  .nav-links.mobile-open .nav-item {
+    padding: 0.95rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--hairline-dark);
+  }
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+  .hero-switcher-bar,
+  .mini-spec-strip,
+  .cells-4,
+  .cells-2,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chapter,
+#home-cad-viewer,
+#avionics-cad-viewer,
+#hil-anatomy-mount,
+#avionics-hil-mount,
+#iso-blueprints {
+  scroll-margin-top: 84px;
+}
+
