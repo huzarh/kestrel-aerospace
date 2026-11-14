@@ -1219,6 +1219,10 @@ function renderConfigurePage(root) {
       statusEl.style.color = '#1A8748';
       statusEl.textContent = `${t('TALEP KAYDEDİLDİ · REFERANS KODU', 'INQUIRY LOGGED · REF ID')}: ${refId}`;
     };
+    if (window.location.hostname.endsWith('.github.io')) {
+      fallbackStaticLog();
+      return;
+    }
     try {
       const resp = await fetch(withBase('/api/inquiries'), {
         method: 'POST',
