@@ -72,7 +72,7 @@ function renderHeader(route) {
           <span class="idx">05</span><span>${t('Üretim & CAD', 'Manufacturing')}</span>
         </a>
         <a href="${routeHref('/research')}" class="nav-item ${route === '/research' ? 'active' : ''}" data-nav="/research">
-          <span class="idx">06</span><span>${t('Bilim & Patent', 'R&D & Patents')}</span>
+          <span class="idx">06</span><span>${t('Bilim & Ar-Ge', 'Science & R&D')}</span>
         </a>
       </nav>
 
@@ -130,7 +130,7 @@ function renderFooter() {
           <ul class="footer-links">
             <li><a href="${routeHref('/avionics')}" data-nav="/avionics">FC-400 ${t('Uçuş Bilgisayarı & Dijital İkiz', 'Flight Core & Digital Twin')}</a></li>
             <li><a href="${routeHref('/manufacturing')}" data-nav="/manufacturing">Q-Lock MP-60 &amp; ${t('ISO A3 Teknik Resimler', 'ISO A3 Shop Drawings')}</a></li>
-            <li><a href="${routeHref('/research')}" data-nav="/research">${t('Bilimsel Doğrulama & 6× PCT Patent', 'Scientific Validation & 6× PCT Patents')}</a></li>
+            <li><a href="${routeHref('/research')}" data-nav="/research">${t('Bilimsel Doğrulama & 6× Ar-Ge Dosyası', 'Scientific Validation & 6× R&D Disclosures')}</a></li>
           </ul>
         </div>
         <div class="footer-cell">
@@ -138,7 +138,7 @@ function renderFooter() {
           <ul class="footer-links">
             <li><a href="${routeHref('/configure')}" data-nav="/configure">${t('Filo Yapılandırıcı & Teklif', 'Fleet Configurator & RFQ')}</a></li>
             <li><a href="${withBase('/blueprints/fc400_blueprint.pdf')}" target="_blank">KST-FC-400-REV-C (PDF)</a></li>
-            <li><a href="${withBase('/blueprints/qlock_blueprint.pdf')}" target="_blank">KST-QL-060-PAT (PDF)</a></li>
+            <li><a href="${withBase('/blueprints/qlock_blueprint.pdf')}" target="_blank">KST-QL-060-REV-B (PDF)</a></li>
           </ul>
         </div>
       </div>
@@ -171,9 +171,9 @@ function renderHomePage(root) {
       coord: '300 L HOPPER · 20 M SWATH · 8× ROTARY VMD + 4× 320W AI LASER',
     },
     a2: {
-      img: withBase('/renders/a2_defense_stealth_hangar.webp'),
-      tag: 'DIV-03 // KESTREL A2 TACTICAL UCAV',
-      coord: '300 M X-BAND AESA · STANAG 1688 · 4× INTERCEPTORS + 2× MAM-L',
+      img: withBase('/renders/a2_combat_sortie_hero.webp'),
+      tag: 'SORTIE // KESTREL A2 AIR-LAUNCH COMBAT',
+      coord: 'ALT 4,200 M · P1 INTERCEPTOR + M1 MAM-L SEPARATION · X-BAND AESA TRACK',
     },
   };
 
@@ -195,8 +195,8 @@ function renderHomePage(root) {
               </h1>
               <p class="prose">
                 ${t(
-                  'Kestrel Aerospace; 11.006 mm otoklav karbon-prepreg kanat mimarisini, kendi üretimi FC-400 üçlü yedekli uçuş bilgisayarını ve patent başvurulu Q-Lock hızlı pilon kaplinini kullanarak tek bir seri üretim hattından sivil LiDAR haritalama (S1), 300 L otonom tarım (B2) ve düşük görünürlüklü sürü SİHA (A2) sistemleri çıkarır.',
-                  'Kestrel Aerospace unifies a 11,006 mm autoclave carbon-prepreg airframe, proprietary FC-400 triple-redundant flight avionics, and patent-pending Q-Lock blind-mate pylons to field civil LiDAR survey (S1), 300 L autonomous crop protection (B2), and low-observable C4ISR swarm platforms (A2) from one production line.'
+                  'Kestrel Aerospace; 11.006 mm otoklav karbon-prepreg kanat mimarisini, kendi tasarımı FC-400 üçlü yedekli uçuş bilgisayarını ve Q-Lock MP-60 hızlı pilon kaplinini kullanarak tek bir seri üretim hattından sivil LiDAR haritalama (S1), 300 L otonom tarım (B2) ve düşük görünürlüklü sürü SİHA (A2) sistemleri çıkarır.',
+                  'Kestrel Aerospace unifies a 11,006 mm autoclave carbon-prepreg airframe, proprietary FC-400 triple-redundant flight avionics, and Q-Lock MP-60 blind-mate titanium pylons to field civil LiDAR survey (S1), 300 L autonomous crop protection (B2), and low-observable C4ISR swarm platforms (A2) from one production line.'
                 )}
               </p>
             </div>
@@ -207,7 +207,7 @@ function renderHomePage(root) {
                 <a href="${routeHref('/manufacturing')}" class="btn btn-outline" data-nav="/manufacturing">${t('ÜRETİM & ISO TEKNİK RESİMLER', 'PRODUCTION & ISO BLUEPRINTS')}</a>
               </div>
               <div class="eyebrow-tag">
-                ${t('GERÇEK GÖREVLER · DOĞRULANMIŞ FİZİK İKİZİ · SIFIR KAVRAMSAL PROTOTİP', 'REAL PAYLOADS · DETERMINISTIC HIL VERIFIED · PRODUCTION CAD GEOMETRY')}
+                ${t('GERÇEK GÖREVLER · DOĞRULANMIŞ FİZİK İKİZİ · ÜRETİM CAD GEOMETRİSİ', 'REAL PAYLOADS · DETERMINISTIC HIL VERIFIED · PRODUCTION CAD GEOMETRY')}
               </div>
             </div>
           </div>
@@ -241,7 +241,7 @@ function renderHomePage(root) {
               </button>
               <button type="button" class="hero-switch-btn" data-hero="a2">
                 <strong>Kestrel A2</strong>
-                <span>${t('AESA SİHA & Sürü', 'AESA UCAV & Swarm')}</span>
+                <span>${t('Hava Taarruz & Sürü', 'Combat Sortie & Swarm')}</span>
               </button>
             </div>
           </div>
@@ -278,7 +278,7 @@ function renderHomePage(root) {
       <div class="rail">
         <div class="section-header-bar">
           <span class="eyebrow">[ 01 // ${t('ORTAK GÖVDE MİMARİSİ & CANLI 3B CAD İNCELEME', 'COMMON AIRFRAME ARCHITECTURE & LIVE 3D CAD INSPECTION')} ]</span>
-          <span class="eyebrow-tag">PATENT PENDING // PCT/TR2026/051189</span>
+          <span class="eyebrow-tag">PN // KST-QL-060-REV-B</span>
         </div>
 
         <div class="split-4-8 fiducial-row">
@@ -397,24 +397,24 @@ function renderHomePage(root) {
               <a href="${withBase('/blueprints/fc400_blueprint.pdf')}" target="_blank" class="btn btn-outline">${t('ISO A3 TEKNİK RESİM (PDF)', 'ISO A3 SHOP DRAWING (PDF)')}</a>
             </div>
           </div>
-          <div class="cell" style="padding:0; background:#0A0C10;">
-            <img src="${withBase('/renders/hardware_fc400_macro.webp')}" alt="Kestrel FC-400 Flight Control PCB Macro" style="width:100%; height:100%; max-height:470px; object-fit:cover;" loading="lazy" />
+          <div class="cell" style="padding:0; background:#0A0C10; display:flex; align-items:center;">
+            <img src="${withBase('/renders/hardware_fc400_macro.webp')}" alt="Kestrel FC-400 Flight Control PCB Macro" style="width:100%; aspect-ratio:16/9; object-fit:cover;" loading="lazy" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CHAPTER 05: DARK HANGAR — COMPOSITE MANUFACTURING & PATENT TEASER -->
+    <!-- CHAPTER 05: DARK HANGAR — COMPOSITE MANUFACTURING & R&D ARCHITECTURE -->
     <section class="chapter" data-theme="dark">
       <div class="rail">
         <div class="section-header-bar">
-          <span class="eyebrow">[ 04 // ${t('OTOKLAV KOMPOZİT ÜRETİM & PATENT PORTFÖYÜ', 'AUTOCLAVE COMPOSITE PRODUCTION & PATENT PORTFOLIO')} ]</span>
-          <span class="eyebrow-tag">6× PCT PATENT PENDING</span>
+          <span class="eyebrow">[ 04 // ${t('OTOKLAV KOMPOZİT ÜRETİM & ÖZGÜN AR-GE DOSYALARI', 'AUTOCLAVE COMPOSITE PRODUCTION & R&D DISCLOSURES')} ]</span>
+          <span class="eyebrow-tag">6× ORIGINAL R&amp;D DISCLOSURES</span>
         </div>
 
         <div class="split-5-7 fiducial-row">
-          <div class="cell" style="padding:0; background:#080A0D;">
-            <img src="${withBase('/renders/manufacturing_exploded_airframe.webp')}" alt="Exploded Autoclave Carbon Airframe" style="width:100%; height:100%; object-fit:cover;" loading="lazy" />
+          <div class="cell" style="padding:0; background:#080A0D; display:flex; align-items:center;">
+            <img src="${withBase('/renders/manufacturing_exploded_airframe.webp')}" alt="Exploded Autoclave Carbon Airframe" style="width:100%; aspect-ratio:16/9; object-fit:contain;" loading="lazy" />
           </div>
           <div class="cell-lg" style="display:flex; flex-direction:column; justify-content:space-between; gap:1.75rem;">
             <div style="display:flex; flex-direction:column; gap:1rem;">
@@ -433,17 +433,17 @@ function renderHomePage(root) {
             </div>
             <div class="cells-2" style="border:1px solid var(--hairline);">
               <div class="cell-surface">
-                <div class="metric-label">PCT/TR2026/051189</div>
+                <div class="metric-label">KST-ENG-01 // STRUCTURES</div>
                 <div style="font-weight:500; margin-top:0.3rem;">Q-Lock MP-60 ${t('Kör-Eşleşmeli Akıllı Pilon', 'Blind-Mate Smart Pylon')}</div>
               </div>
               <div class="cell-surface">
-                <div class="metric-label">PCT/TR2026/051240</div>
+                <div class="metric-label">KST-ENG-03 // PRECISION AG</div>
                 <div style="font-weight:500; margin-top:0.3rem;">${t('Dinamik-VMD + 320W Lazer Hibrit Boom', 'Dynamic-VMD + 320W Laser Boom')}</div>
               </div>
             </div>
             <div class="btn-row">
               <a href="${routeHref('/manufacturing')}" class="btn btn-volt" data-nav="/manufacturing">${t('ÜRETİM HATTI & HIL TEZGAHI', 'MANUFACTURING & HIL RIG')} -&gt;</a>
-              <a href="${routeHref('/research')}" class="btn btn-outline" data-nav="/research">${t('TÜM PATENTLER & BİLİMSEL VERİLER', 'PATENTS & SCIENTIFIC DATA')}</a>
+              <a href="${routeHref('/research')}" class="btn btn-outline" data-nav="/research">${t('AR-GE & BİLİMSEL VERİLER', 'R&D & SCIENTIFIC DATA')}</a>
             </div>
           </div>
         </div>
@@ -533,7 +533,7 @@ function renderPlatformPage(root, key) {
         </div>
         <div class="cells-2 fiducial-row">
           <div class="cell" style="padding:0; background:#090A0C; display:flex; flex-direction:column;">
-            <img src="${p.detailImg}" alt="${trEn(p.name)} Subsystem Detail" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-bottom:1px solid var(--hairline);" />
+            <img src="${p.detailImg}" alt="${trEn(p.name)} Subsystem Detail" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-bottom:1px solid var(--hairline);" />
             <div style="padding:1.5rem;">
               <div class="eyebrow" style="color:var(--signal-volt); margin-bottom:0.4rem;">CYCLES OPTIX // MACRO HARDWARE</div>
               <p class="prose" style="color:var(--ink-secondary-dark); font-size:0.94rem;">
@@ -553,7 +553,7 @@ function renderPlatformPage(root, key) {
     </section>
 
     ${key === 'b2' ? renderB2AgroCalculatorSection() : ''}
-    ${key === 'a2' ? renderA2LoadoutMatrixSection() : ''}
+    ${key === 'a2' ? renderA2LoadoutMatrixSection(p) : ''}
     ${key === 's1' ? renderS1GsdMatrixSection() : ''}
 
     <!-- TABBED ENGINEERING SPECIFICATION SHEET -->
@@ -695,34 +695,48 @@ function bindB2Calculator(root) {
   update();
 }
 
-function renderA2LoadoutMatrixSection() {
+function renderA2LoadoutMatrixSection(p) {
   const stations = [
     ['M2 · Y +4.35 m', 'MAM-L #2 (SALH)', '22.0 kg · STANAG 1688 · 95 m/s · 22.4 G'],
-    ['P4 · Y +2.55 m', 'Önleyici İHA #4', '0.85 kg · 3B PN (N=4.6) · 52 m/s · Safir Arayıcı'],
-    ['P3 · Y +1.22 m', 'Önleyici İHA #3', '0.85 kg · 3B PN (N=4.6) · Eskort / Salvo'],
-    ['GÖVDE MERKEZ', 'AESA + EH + EO/IR', '300 m X-Band · DRFM Karıştırıcı · 30 Chaff / 30 Flare'],
-    ['P2 · Y -1.22 m', 'Önleyici İHA #2', '0.85 kg · 3B PN (N=4.6) · Eskort / Salvo'],
-    ['P1 · Y -2.55 m', 'Önleyici İHA #1', '0.85 kg · 3B PN (N=4.6) · 52 m/s · Safir Arayıcı'],
+    ['P4 · Y +2.55 m', t('Önleyici İHA #4', 'Interceptor UAV #4'), t('0.85 kg · 3B PN (N=4.6) · 52 m/s · Safir Arayıcı', '0.85 kg · 3D PN (N=4.6) · 52 m/s · Sapphire Seeker')],
+    ['P3 · Y +1.22 m', t('Önleyici İHA #3', 'Interceptor UAV #3'), t('0.85 kg · 3B PN (N=4.6) · Eskort / Salvo', '0.85 kg · 3D PN (N=4.6) · Escort / Salvo')],
+    [t('GÖVDE MERKEZ', 'CENTERLINE'), 'AESA + EH + EO/IR', '300 m X-Band · DRFM · 30 Chaff / 30 Flare'],
+    ['P2 · Y -1.22 m', t('Önleyici İHA #2', 'Interceptor UAV #2'), t('0.85 kg · 3B PN (N=4.6) · Eskort / Salvo', '0.85 kg · 3D PN (N=4.6) · Escort / Salvo')],
+    ['P1 · Y -2.55 m', t('Önleyici İHA #1', 'Interceptor UAV #1'), t('0.85 kg · 3B PN (N=4.6) · 52 m/s · Safir Arayıcı', '0.85 kg · 3D PN (N=4.6) · 52 m/s · Sapphire Seeker')],
     ['M1 · Y -4.35 m', 'MAM-L #1 (SALH)', '22.0 kg · STANAG 1688 · 95 m/s · SEAD Anti-Radar'],
   ];
   return `
     <section class="chapter" data-theme="dark" data-div="a2">
       <div class="rail">
         <div class="section-header-bar">
-          <span class="eyebrow">[ 02 // ${t('6-İSTASYONLU SİLAH & SÜRÜ YÖNETİM SİSTEMİ (SMS)', '6-STATION WEAPONS & SWARM MANAGEMENT SYSTEM (SMS)')} ]</span>
+          <span class="eyebrow">[ 02 // ${t('TAKTİK HANGAR HAZIRLIK & 6-İSTASYONLU SİLAH/SÜRÜ YÖNETİMİ (SMS)', 'TACTICAL HANGAR READINESS & 6-STATION WEAPONS/SWARM SMS')} ]</span>
           <span class="eyebrow-tag">MIL-STD-1760 // MASTER ARM &ge; 18M AGL</span>
         </div>
-        <div class="cell" style="padding:0;">
-          <table class="spec-table">
-            <tbody>
-              ${stations.map(([st, weapon, spec]) => `
-                <tr>
-                  <th style="color:var(--signal-volt);">${st}</th>
-                  <td class="val">${weapon} — <span style="color:var(--ink-secondary-dark); font-weight:400;">${spec}</span></td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
+        <div class="split-5-7 fiducial-row">
+          <div class="cell" style="padding:0; background:#090B0E; display:flex; flex-direction:column;">
+            <img src="${p.hangarImg}" alt="${trEn(p.name)} Stealth Hangar Pre-Flight" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-bottom:1px solid var(--hairline);" loading="lazy" />
+            <div style="padding:1.4rem;">
+              <div class="eyebrow" style="color:var(--signal-volt); margin-bottom:0.4rem;">FS 36118 RAM // HANGAR PRE-FLIGHT</div>
+              <p class="prose" style="color:var(--ink-secondary-dark); font-size:0.9rem;">
+                ${t(
+                  'Düşük görünürlüklü RAM kaplama, konformal X-Bant AESA burun radomu, Ti-6Al-4V Pitot-AOA probu, sırt Ku-Bant BLOS SATCOM kubbesi ve karın altı DRFM + ALE-47 karşı tedbir podu.',
+                  'Low-observable FS 36118 RAM finish, conformal X-Band AESA nose radome, Ti-6Al-4V Pitot-AOA boom, dorsal Ku-Band BLOS SATCOM dome, and ventral DRFM + ALE-47 dispenser pod.'
+                )}
+              </p>
+            </div>
+          </div>
+          <div class="cell" style="padding:0;">
+            <table class="spec-table">
+              <tbody>
+                ${stations.map(([st, weapon, spec]) => `
+                  <tr>
+                    <th style="color:var(--signal-volt);">${st}</th>
+                    <td class="val">${weapon} — <span style="color:var(--ink-secondary-dark); font-weight:400;">${spec}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -994,19 +1008,19 @@ function renderManufacturingPage(root) {
 }
 
 /* ==========================================================================
-   PAGE 7: SCIENTIFIC VALIDATION & PATENT PORTFOLIO (/research)
+   PAGE 7: SCIENTIFIC VALIDATION & ORIGINAL R&D ARCHITECTURE (/research)
    ========================================================================== */
 function renderResearchPage(root) {
   root.innerHTML = `
     <section class="chapter" data-theme="dark">
       <div class="rail">
         <div class="cell-lg" style="padding-block: clamp(3rem, 5vw, 4.5rem);">
-          <div class="eyebrow" style="color:var(--signal-volt); margin-bottom:1rem;">[ 06 // ${t('BİLİMSEL DOĞRULAMA & FİKRİ MÜLKİYET PORTFÖYÜ', 'SCIENTIFIC VALIDATION & INTELLECTUAL PROPERTY LEDGER')} ]</div>
-          <h1 class="h-hero" style="max-width: 22ch;">${t('Ölçülmüş Fiziksel Veriler ve 6× Patent Başvurusu.', 'Empirical Flight Physics & 6× Patent Filings.')}</h1>
+          <div class="eyebrow" style="color:var(--signal-volt); margin-bottom:1rem;">[ 06 // ${t('BİLİMSEL DOĞRULAMA & ÖZGÜN AR-GE MİMARİSİ', 'SCIENTIFIC VALIDATION & ORIGINAL R&D ARCHITECTURE')} ]</div>
+          <h1 class="h-hero" style="max-width: 22ch;">${t('Ölçülmüş Fiziksel Veriler ve 6× Özgün Mühendislik Dosyası.', 'Empirical Flight Physics & 6× Original R&D Disclosures.')}</h1>
           <p class="prose" style="margin-top:1.2rem;">
             ${t(
-              'Kestrel mühendislik iddiaları pazarlama tahminlerine değil; EPA AgDRIFT® damlacık dağılım modellerine, milimetre altı RTX LiDAR kalibrasyon bloklarına ve tescil aşamasındaki özgün mekanik/aviyonik buluşlara dayanır.',
-              'Every Kestrel performance claim is anchored in EPA AgDRIFT® deposition physics, millimeter-grade RTX LiDAR block calibrations, and patent-pending mechanical and avionics disclosures.'
+              'Kestrel mühendislik iddiaları pazarlama tahminlerine değil; EPA AgDRIFT® damlacık dağılım modellerine, milimetre altı RTX LiDAR kalibrasyon bloklarına ve doğrulanmış CAD/SDF/HIL alt sistem mimarilerine dayanır.',
+              'Every Kestrel performance claim is anchored in EPA AgDRIFT® deposition physics, millimeter-grade RTX LiDAR block calibrations, and verified CAD/SDF/HIL mechanical and avionics architectures.'
             )}
           </p>
         </div>
@@ -1025,8 +1039,8 @@ function renderResearchPage(root) {
     <section class="chapter" data-theme="light">
       <div class="rail">
         <div class="section-header-bar">
-          <span class="eyebrow">[ 01 // ${t('ULUSLARARASI PATENT BAŞVURU KAYIT DEFTERİ (PCT)', 'INTERNATIONAL PCT PATENT OBLIGATION & DISCLOSURE LEDGER')} ]</span>
-          <span class="eyebrow-tag">WIPO / PCT 2026</span>
+          <span class="eyebrow">[ 01 // ${t('ÖZGÜN MÜHENDİSLİK & ALT SİSTEM AR-GE KAYIT DEFTERİ', 'ORIGINAL SUBSYSTEM ENGINEERING & R&D DISCLOSURE LEDGER')} ]</span>
+          <span class="eyebrow-tag">KST-ENG // VERIFIED ARCHITECTURE</span>
         </div>
         <div>
           ${PATENTS.map((pat) => `
@@ -1040,7 +1054,7 @@ function renderResearchPage(root) {
                 <p class="prose" style="font-size:0.93rem;">${trEn(pat.abstract)}</p>
               </div>
               <div style="display:flex; align-items:flex-start; justify-content:flex-end;">
-                <span class="status-pill">${pat.status}</span>
+                <span class="status-pill">${trEn(pat.status)}</span>
               </div>
             </div>
           `).join('')}

@@ -29,13 +29,13 @@ const MODEL_CATALOG = {
   fc400: {
     url: `${SITE_ROOT}/models/kestrel_fc400_pcb.glb`,
     code: 'KST-FC-400-REV-C',
-    dims: '148.0 × 96.0 × 13.0 mm',
+    dims: '148.0 × 96.0 × 13.0 mm (157 mm w/ SMA)',
     labelTr: 'FC-400 Aviyonik Kart',
     labelEn: 'FC-400 Flight Core',
   },
   qlock: {
     url: `${SITE_ROOT}/models/qlock_wing_coupler.glb`,
-    code: 'KST-QL-060-PAT',
+    code: 'KST-QL-060-REV-B',
     dims: '180.0 × 76.0 × 58.0 mm',
     labelTr: 'Q-Lock Pilon Kaplini',
     labelEn: 'Q-Lock Pylon Coupler',
@@ -94,35 +94,35 @@ export function mountCadViewer(hostEl, { initialModel = 'a2', allowedModels = ['
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.AgXToneMapping;
-  renderer.toneMappingExposure = 1.06;
+  renderer.toneMappingExposure = 0.96;
   stage.insertBefore(renderer.domElement, overlay);
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x0b0d11);
 
-  // Build procedural aerospace studio softbox IBL so metallic RAM, Ti-6Al-4V & ENIG gold reflect naturally
+  // Build controlled dark-hangar softbox IBL so dark stealth RAM stays gunship grey without overhead whitewash
   const pmrem = new THREE.PMREMGenerator(renderer);
   const envScene = new THREE.Scene();
-  envScene.background = new THREE.Color(0x161a22);
+  envScene.background = new THREE.Color(0x10141b);
   const skyPanel = new THREE.Mesh(
-    new THREE.PlaneGeometry(24, 24),
-    new THREE.MeshBasicMaterial({ color: 0xdce6f5, side: THREE.DoubleSide })
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.MeshBasicMaterial({ color: 0x455062, side: THREE.DoubleSide })
   );
-  skyPanel.position.set(0, 10, 0);
+  skyPanel.position.set(0, 11, 0);
   skyPanel.rotation.x = Math.PI / 2;
   envScene.add(skyPanel);
   const warmSide = new THREE.Mesh(
-    new THREE.PlaneGeometry(16, 10),
-    new THREE.MeshBasicMaterial({ color: 0xfff0db, side: THREE.DoubleSide })
+    new THREE.PlaneGeometry(14, 9),
+    new THREE.MeshBasicMaterial({ color: 0xc8b9a4, side: THREE.DoubleSide })
   );
-  warmSide.position.set(10, 3, 8);
+  warmSide.position.set(11, 3.5, 8);
   warmSide.lookAt(0, 0, 0);
   envScene.add(warmSide);
   const coolRim = new THREE.Mesh(
-    new THREE.PlaneGeometry(16, 10),
-    new THREE.MeshBasicMaterial({ color: 0x6c92c8, side: THREE.DoubleSide })
+    new THREE.PlaneGeometry(14, 9),
+    new THREE.MeshBasicMaterial({ color: 0x4b6c9b, side: THREE.DoubleSide })
   );
-  coolRim.position.set(-10, 4, -8);
+  coolRim.position.set(-11, 4, -8);
   coolRim.lookAt(0, 0, 0);
   envScene.add(coolRim);
   const envRT = pmrem.fromScene(envScene, 0.04);
@@ -139,20 +139,20 @@ export function mountCadViewer(hostEl, { initialModel = 'a2', allowedModels = ['
   controls.autoRotateSpeed = 0.85;
   controls.maxPolarAngle = Math.PI * 0.62;
 
-  // Precision studio lighting
-  const hemi = new THREE.HemisphereLight(0xdce6f5, 0x232936, 1.15);
+  // Precision studio lighting calibrated for both dark RAM and bright gelcoat composites
+  const hemi = new THREE.HemisphereLight(0xc2cee0, 0x1a202c, 0.72);
   scene.add(hemi);
 
-  const keyLight = new THREE.DirectionalLight(0xfff7eb, 1.65);
-  keyLight.position.set(7, 11, 8);
+  const keyLight = new THREE.DirectionalLight(0xfff5e8, 1.35);
+  keyLight.position.set(7.5, 9.5, 8.5);
   scene.add(keyLight);
 
-  const rimLight = new THREE.DirectionalLight(0x88b4ff, 1.15);
-  rimLight.position.set(-8, 5, -7);
+  const rimLight = new THREE.DirectionalLight(0x7ca8f2, 0.98);
+  rimLight.position.set(-8.5, 5.5, -7.5);
   scene.add(rimLight);
 
-  const fillLight = new THREE.DirectionalLight(0xe4e8f0, 0.75);
-  fillLight.position.set(-4, -3, 6);
+  const fillLight = new THREE.DirectionalLight(0xd2dae8, 0.48);
+  fillLight.position.set(-4.5, -2.5, 6.5);
   scene.add(fillLight);
 
   const grid = new THREE.GridHelper(14, 28, 0x2f3744, 0x181d25);
@@ -222,6 +222,23 @@ export function mountCadViewer(hostEl, { initialModel = 'a2', allowedModels = ['
                 metalness: 0.65,
                 roughness: 0.30,
               });
+            } else if (!obj.geometry?.attributes?.uv) {
+              const sanitizeMat = (m) => {
+                if (!m || !m.isMaterial) return m;
+                return new THREE.MeshStandardMaterial({
+                  name: m.name || '',
+                  color: m.color ? m.color.clone() : new THREE.Color(0x7b838e),
+                  metalness: typeof m.metalness === 'number' ? m.metalness : 0.2,
+                  roughness: typeof m.roughness === 'number' ? Math.max(0.14, m.roughness) : 0.4,
+                  emissive: m.emissive ? m.emissive.clone() : new THREE.Color(0x000000),
+                  emissiveIntensity: typeof m.emissiveIntensity === 'number' ? m.emissiveIntensity : 0,
+                  envMapIntensity: 1.05,
+                  wireframe: wireframeOn,
+                });
+              };
+              obj.material = Array.isArray(obj.material)
+                ? obj.material.map(sanitizeMat)
+                : sanitizeMat(obj.material);
             }
           }
         });

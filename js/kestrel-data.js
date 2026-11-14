@@ -1,4 +1,4 @@
-// Ground-Truth Engineering, Platform, Manufacturing & Patent Ledger for Kestrel Aerospace
+// Ground-Truth Engineering, Platform, Manufacturing & R&D Architecture Ledger for Kestrel Aerospace
 
 export const SITE_ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 export const withBase = (p) => `${SITE_ROOT}${p}`;
@@ -135,7 +135,8 @@ export const PLATFORMS = {
     code: 'KST-A2 // DIV-03',
     route: '/platforms/a2',
     accent: '#FF4400',
-    heroImg: withBase('/renders/a2_defense_stealth_hangar.webp'),
+    heroImg: withBase('/renders/a2_combat_sortie_hero.webp'),
+    hangarImg: withBase('/renders/a2_defense_stealth_hangar.webp'),
     detailImg: withBase('/renders/a2_defense_pylon_closeup.webp'),
     glbKey: 'a2',
     name: {
@@ -147,7 +148,7 @@ export const PLATFORMS = {
       en: 'Low-Observable C4ISR UCAV, Electronic Warfare & Swarm Carrier',
     },
     commercialBar: {
-      tr: ['Kestrel A2', 'NATO FS 36118 Düşük İza', '300 m X-Band AESA + STANAG 1688', '4× Önleyici İHA + 2× MAM-L Pilon'],
+      tr: ['Kestrel A2', 'NATO FS 36118 Düşük İz (RAM)', '300 m X-Band AESA + STANAG 1688', '4× Önleyici İHA + 2× MAM-L Pilon'],
       en: ['Kestrel A2', 'NATO FS 36118 Low-Observable', '300 m X-Band AESA + STANAG 1688', '4× Interceptor Drones + 2× MAM-L Pylons'],
     },
     summary: {
@@ -173,7 +174,7 @@ export const PLATFORMS = {
       weapons: {
         title: { tr: '6-Pilon Sürü & Mühimmat', en: '6-Pylon Swarm & Munitions' },
         rows: [
-          [{ tr: 'İç/Orta İstasyonlar (P1–P4)', en: 'Inboard/Mid Stations (P1–P4)' }, '4× Otonom X-Kanat Önleyici İHA (Y = ±1.22 m, ±2.55 m · 0.85 kg · Safir FPV Arayıcı)'],
+          [{ tr: 'İç/Orta İstasyonlar (P1–P4)', en: 'Inboard/Mid Stations (P1–P4)' }, '4× Otonom X-Kanat Önleyici İHA (Y = ±1.22 m, ±2.55 m · 0.85 kg · Safir Optik Arayıcı)'],
           [{ tr: 'Önleyici Güdüm & Çeviklik', en: 'Interceptor Guidance & Agility' }, '3B Gerçek Oransal Seyrüsefer (N = 4.6) · 52 m/s (187 km/sa) · 14.3 G Yanal İvme · SALVO Modu'],
           [{ tr: 'Dış İstasyonlar (M1–M2)', en: 'Outboard Stations (M1–M2)' }, '2× MAM-L Sınıfı Yarı-Aktif Lazer Güdümlü Mühimmat (Y = ±4.35 m · 22.0 kg · 937 mm)'],
           [{ tr: 'Mühimmat Terminal Vuruş', en: 'Munition Terminal Guidance' }, 'STANAG 1688 SALH Arayıcı · 3B PN (N = 5.0) · 95 m/s (342 km/sa) · 22.4 G · Otomatik SEAD'],
@@ -207,14 +208,14 @@ export const BLUEPRINTS = [
     },
     material: 'ISOLA FR408HR 10-LAYER ENIG / AL 7075-T6 CNC',
     desc: {
-      tr: '148 × 96 mm 10-katmanlı kart üzerinde çift lockstep STM32H753 uçuş işlemcisi, kanatçıklı CNC soğutuculu NVIDIA Orin NX 16GB SOM, elastomer yalıtımlı üçlü IMU kubbesi ve çift DroneCAN / 1000BASE-T1 konnektör yerleşimi.',
-      en: '148 × 96 mm 10-layer assembly housing dual lockstep STM32H753 flight MCUs, CNC-finned NVIDIA Orin NX 16GB SOM heatsink, elastomer-isolated triple-IMU Faraday dome, and dual DroneCAN / 1000BASE-T1 interfaces.',
+      tr: '148 × 96 mm (kenar SMA konnektörlerle 157 mm zarf) 10-katmanlı kart üzerinde çift lockstep STM32H753 uçuş işlemcisi, kanatçıklı CNC soğutuculu NVIDIA Orin NX 16GB SOM, elastomer yalıtımlı üçlü IMU kubbesi ve çift DroneCAN / 1000BASE-T1 arayüzü.',
+      en: '148 × 96 mm (157 mm envelope w/ edge SMA jacks) 10-layer assembly housing dual lockstep STM32H753 flight MCUs, CNC-finned NVIDIA Orin NX 16GB SOM heatsink, elastomer-isolated triple-IMU Faraday dome, and dual DroneCAN / 1000BASE-T1 ports.',
     },
   },
   {
     id: 'qlock',
-    partNumber: 'KST-QL-060-PAT',
-    sheet: 'ISO A3 · THIRD ANGLE · PATENT PCT/TR2026/051189',
+    partNumber: 'KST-QL-060-REV-B',
+    sheet: 'ISO A3 · THIRD ANGLE · REV B',
     img: withBase('/blueprints/qlock_blueprint.png'),
     pdf: withBase('/blueprints/qlock_blueprint.pdf?download=1'),
     viewPdf: withBase('/blueprints/qlock_blueprint.pdf'),
@@ -251,34 +252,34 @@ export const BLUEPRINTS = [
 
 export const PATENTS = [
   {
-    filingId: 'PCT/TR2026/051189',
-    status: 'PATENT PENDING',
+    filingId: 'KST-ENG-01',
+    status: { tr: 'CAD & PROTOTİP', en: 'CAD & PROTOTYPE' },
     division: 'COMMON AIRFRAME',
     title: {
       tr: 'Kör-Eşleşmeli Yapısal, Güç ve Akışkan Geçişli Modüler Kanat Pilon Kaplini (Q-Lock MP-60)',
       en: 'Blind-Mate Structural, High-Current & Fluid Pass-Through Modular Wing Pylon Coupler (Q-Lock MP-60)',
     },
     abstract: {
-      tr: 'Tek bir karbon kutu-spar kanat mimarisinin yapısal söküm gerektirmeden yüksek basınçlı sıvı ilaçlama hatları (6 bar), 60A DC güç veri yolu ve MIL-STD-1760 mühimmat bırakma mekanizmaları arasında tek pimle kilitlenmesini sağlar.',
-      en: 'Enables single-pin structural locking between a common carbon box-spar wing and interchangeable 6-bar liquid spray manifolds, 60A DC power buses, or MIL-STD-1760 ordnance racks without airframe re-rigging.',
+      tr: 'Tek bir karbon kutu-spar kanat mimarisinin yapısal söküm gerektirmeden yüksek basınçlı sıvı ilaçlama hatları (6 bar), 60A DC güç veri yolu ve MIL-STD-1760 mühimmat bırakma mekanizmaları arasında Ø12 mm H7 tek pimle kilitlenmesini sağlar.',
+      en: 'Enables single-pin Ø12 mm H7 structural locking between a common carbon box-spar wing and interchangeable 6-bar liquid spray manifolds, 60A DC power buses, or MIL-STD-1760 ordnance racks without airframe re-rigging.',
     },
   },
   {
-    filingId: 'PCT/TR2026/051104',
-    status: 'PATENT PENDING',
+    filingId: 'KST-ENG-02',
+    status: { tr: 'CAD & SDF DOĞRULANDI', en: 'CAD & SDF VERIFIED' },
     division: 'S1 / B2 / A2 NOSE',
     title: {
       tr: 'Sınır Tabaka Ayrılmasını Önleyen Konformal Burun LiDAR / mmWave / AESA Radom Arayüzü',
       en: 'Laminar-Preserving Conformal Nose Bulkhead for Swap-Ready LiDAR, mmWave & AESA Radomes',
     },
     abstract: {
-      tr: 'X = 2.340 m burun çerçevesinde harici dikme veya aerodinamik sürüklenme yaratan çıkıntılar olmaksızın katı-hal LiDAR, tarımsal gece projektörü veya X-Band AESA radar modüllerini gövde konturuna teğet birleştirir.',
-      en: 'Tangentially mates solid-state 3D LiDAR, nocturnal floodlights, or X-Band AESA radar assemblies at station X = 2.340 m with zero parasitic strut drag or laminar boundary-layer separation.',
+      tr: 'X = +2.340 m burun çerçevesinde harici dikme veya aerodinamik sürüklenme yaratan çıkıntılar olmaksızın katı-hal LiDAR, tarımsal gece projektörü veya X-Band AESA radar modüllerini gövde konturuna teğet birleştirir.',
+      en: 'Tangentially mates solid-state 3D LiDAR, nocturnal floodlights, or X-Band AESA radar assemblies at station X = +2.340 m with zero parasitic strut drag or laminar boundary-layer separation.',
     },
   },
   {
-    filingId: 'PCT/TR2026/051240',
-    status: 'PATENT PENDING',
+    filingId: 'KST-ENG-03',
+    status: { tr: 'HIL DOĞRULANDI (9/9)', en: 'HIL VERIFIED (9/9)' },
     division: 'DIV-02 AGRO (B2)',
     title: {
       tr: 'Gerçek Zamanlı Rüzgar-Sürüklenme Kompanzasyonlu Döner Atomizer ve Eş-Eksenli Optik Lazer Ablasyon Sistemi',
@@ -290,21 +291,21 @@ export const PATENTS = [
     },
   },
   {
-    filingId: 'PCT/TR2026/051302',
-    status: 'PATENT PENDING',
+    filingId: 'KST-ENG-04',
+    status: { tr: 'HIL DOĞRULANDI (8/8)', en: 'HIL VERIFIED (8/8)' },
     division: 'DIV-03 DEFENSE (A2)',
     title: {
-      tr: ' Kanat Altı Çoklu Önleyici Mikro-İHA Salvo Bırakma ve Kooperatif 3B Oransal Seyrüsefer Güdümü',
+      tr: 'Kanat Altı Çoklu Önleyici Mikro-İHA Salvo Bırakma ve Kooperatif 3B Oransal Seyrüsefer Güdümü',
       en: 'Underwing Multi-Interceptor Ripple Release & Cooperative 3D True Proportional Navigation',
     },
     abstract: {
-      tr: 'Ana SİHA AESA radarı ile önleyici burun FPV arayıcılarını birleştirerek 4 adet yüksek hızlı (52 m/s, 14.3 G) önleyici İHA’nın çoklu hava hedeflerine çakışmasız görev paylaşımıyla kilitlenmesini sağlar.',
+      tr: 'Ana SİHA X-Band AESA radarı ile önleyici burun optik arayıcılarını birleştirerek 4 adet yüksek hızlı (52 m/s, 14.3 G) önleyici İHA’nın çoklu hava hedeflerine çakışmasız görev paylaşımıyla kilitlenmesini sağlar.',
       en: 'Fuses mothership X-Band AESA track files with onboard optical seekers across 4 air-launched 52 m/s (14.3 G) interceptors for deconflicted multi-target aerial engagement.',
     },
   },
   {
-    filingId: 'PCT/TR2026/051355',
-    status: 'PATENT PENDING',
+    filingId: 'KST-ENG-05',
+    status: { tr: 'ÇİFT-MOTOR DOĞRULANDI', en: 'DUAL-SOLVER VERIFIED' },
     division: 'AVIONICS & TWIN',
     title: {
       tr: 'Çift-Çözücülü (Gazebo DART + Isaac PhysX/RTX) Deterministik Uçuş Kontrol Doğrulama Köprüsü',
@@ -316,8 +317,8 @@ export const PATENTS = [
     },
   },
   {
-    filingId: 'PCT/TR2026/051410',
-    status: 'PUBLISHED R&D',
+    filingId: 'KST-ENG-06',
+    status: { tr: 'HIL DOĞRULANDI', en: 'HIL VERIFIED' },
     division: 'DIV-02 AGRO (B2)',
     title: {
       tr: 'Hava Termal CWSI Haritalamasından LoRaWAN Merkez-Pivot Sulama Vanalarına Kapalı-Çevrim Otonom Tetikleme',

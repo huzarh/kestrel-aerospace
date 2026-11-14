@@ -512,16 +512,16 @@ button, input, select, textarea {
   grid-template-columns: 5fr 7fr;
   gap: 1px;
   background: var(--hairline);
-  min-height: 610px;
+  min-height: 520px;
 }
 
 .hero-copy-cell {
   background: var(--bg-canvas);
-  padding: clamp(2.2rem, 4vw, 3.75rem) var(--cell-pad-md);
+  padding: clamp(1.85rem, 3vw, 2.75rem) var(--cell-pad-md);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.65rem;
 }
 
 .hero-media-cell {
@@ -536,8 +536,9 @@ button, input, select, textarea {
 .hero-render-wrap {
   position: relative;
   width: 100%;
+  aspect-ratio: 16 / 9;
   flex: 1;
-  min-height: 440px;
+  min-height: 360px;
   background: #07080A;
 }
 
